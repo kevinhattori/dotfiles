@@ -2,7 +2,7 @@
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-files=(".tmux.conf" ".zshrc")
+files=(".tmux.conf" ".zshrc" ".config/starship.toml")
 
 for file in "${files[@]}"; do
     target="$HOME/$file"
@@ -18,7 +18,7 @@ for file in "${files[@]}"; do
 done
 
 # Config directories (files nested under ~/.config)
-config_dirs=(".config/cava")
+config_dirs=(".config/cava" ".config/ghostty" ".zsh")
 
 for dir in "${config_dirs[@]}"; do
     mkdir -p "$HOME/$(dirname "$dir")"
