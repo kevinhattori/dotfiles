@@ -44,8 +44,10 @@ fi
 
 install_brew_formula archey
 install_brew_formula cava
+install_brew_formula fzf
 install_brew_formula starship
 install_brew_formula tmux
+install_brew_formula zoxide
 
 # ── Fonts ─────────────────────────────────────────────────────────────────────
 

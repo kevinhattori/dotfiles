@@ -114,3 +114,9 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Starship prompt
 eval "$(starship init zsh)"
+
+# zoxide (smart cd)
+eval "$(zoxide init zsh --cmd cd)"
+
+# fzf shell integration
+eval "$(fzf --zsh)"
