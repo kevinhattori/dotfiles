@@ -40,9 +40,21 @@ else
     skip "Homebrew already installed"
 fi
 
+eval "$(brew shellenv)"
+
+# ── OS detection ──────────────────────────────────────────────────────────────
+
+IS_MACOS=false
+IS_LINUX=false
+[[ "$(uname)" == "Darwin" ]] && IS_MACOS=true || IS_LINUX=true
+
 # ── CLI tools ─────────────────────────────────────────────────────────────────
 
-install_brew_formula archey
+if $IS_MACOS; then
+    install_brew_formula archey
+else
+    install_brew_formula archey4
+fi
 install_brew_formula cava
 install_brew_formula fzf
 install_brew_formula starship
@@ -51,7 +63,24 @@ install_brew_formula zoxide
 
 # ── Fonts ─────────────────────────────────────────────────────────────────────
 
-install_brew_cask font-jetbrains-mono-nerd-font
+if $IS_MACOS; then
+    install_brew_cask font-jetbrains-mono-nerd-font
+else
+    FONT_DIR="$HOME/.local/share/fonts"
+    if fc-list 2>/dev/null | grep -qi "JetBrainsMono Nerd Font"; then
+        skip "JetBrainsMono Nerd Font already installed"
+    else
+        info "Installing JetBrainsMono Nerd Font..."
+        mkdir -p "$FONT_DIR"
+        curl -fsSL "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz" \
+            -o /tmp/JetBrainsMono.tar.xz \
+            && tar -xf /tmp/JetBrainsMono.tar.xz -C "$FONT_DIR" \
+            && fc-cache -f "$FONT_DIR" \
+            && rm /tmp/JetBrainsMono.tar.xz \
+            && success "JetBrainsMono Nerd Font installed" \
+            || echo "[warn]  Failed to install JetBrainsMono Nerd Font"
+    fi
+fi
 
 # ── oh-my-zsh ────────────────────────────────────────────────────────────────
 

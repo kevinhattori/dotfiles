@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/opt/homebrew/bin:$PATH
+eval "$(brew shellenv 2>/dev/null)"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -83,7 +83,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/usr/bin:$HOME/Library/Python/3.8/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:$PATH
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -108,7 +108,11 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/bin:$HOME/Library/Python/3.8/bin:$PATH
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll="ls -la"
 
-archey
+export AWS_PROFILE=kevinerickson-kiro
+
+if command -v archey4 &>/dev/null; then archey4 --offline
+elif command -v archey &>/dev/null; then archey --offline
+fi
 
 export PATH="$HOME/.local/bin:$PATH"
 
